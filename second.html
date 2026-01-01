@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just One More 😉</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* ===== INDIVIDUAL QUOTE ANIMATIONS ===== */
+.quote-line {
+    opacity: 0;
+    transform: translateX(-100vw);
+    display: block;
+    animation: flyIn 1.6s cubic-bezier(.17,.67,.4,1) forwards;
+    animation-play-state: paused;
+}
+.quote-line.delay1 { animation-delay: 0.8s; }
+.quote-line.delay2 { animation-delay: 1.8s; }
+.quote-line.delay3 { animation-delay: 2.8s; }
+.quote-line.delay4 { animation-delay: 3.8s; }
+
+@keyframes flyIn {
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.soft-float {
+    animation: softFloat 4s ease-in-out infinite;
+}
+@keyframes softFloat {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+
+.happy-new-year {
+    display: inline-block;
+    opacity: 0;
+    transform: rotate(-720deg) scale(0);
+    animation: spinPop 3s ease-out forwards;
+    animation-delay: 5s;
+    animation-play-state: paused;
+    font-size: 3.4rem;
+}
+
+@keyframes spinPop {
+    0% { transform: rotate(-720deg) scale(0); opacity: 0; }
+    60% { transform: rotate(360deg) scale(1.45); opacity: 1; }
+    100% { transform: rotate(0deg) scale(1); opacity: 1; }
+}
+
+.gift-btn {
+    opacity: 0;
+    transform: scale(0.4);
+    animation: bounceIn 1.6s ease-out forwards;
+    animation-delay: 6.5s;
+    animation-play-state: paused;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.4); opacity: 0; }
+    60% { transform: scale(1.35); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.stage-1.hide {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
+
+.stage-2 {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.6s ease;
+}
+.stage-2.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ===== PERFECT HEART ===== */
+.heart.big-heart.beat {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transform: rotate(-45deg);
+    background: #ff4fa3;
+    animation: beat 1s infinite;
+}
+
+.heart.big-heart.beat::before,
+.heart.big-heart.beat::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: #ff4fa3;
+    border-radius: 50%;
+}
+
+.heart.big-heart.beat::before {
+    top: -50px;
+    left: 0;
+}
+.heart.big-heart.beat::after {
+    left: 50px;
+    top: 0;
+}
+
+@keyframes beat {
+    0%,100% { transform: rotate(-45deg) scale(1); }
+    50% { transform: rotate(-45deg) scale(1.2); }
+}
+
+/* HEART RAIN */
+.heart-rain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.falling-heart {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: #ff4fa3;
+    transform: rotate(45deg);
+    animation: heartFall linear forwards;
+}
+
+.falling-heart::before,
+.falling-heart::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: #ff4fa3;
+    border-radius: 50%;
+}
+.falling-heart::before { top: -7px; left: 0; }
+.falling-heart::after { left: -7px; top: 0; }
+
+@keyframes heartFall {
+    0% { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(45deg); opacity: 0; }
+}
+
+/* MOBILE ADJUSTMENTS */
+@media(max-width:600px){
+    .heart.big-heart.beat{
+        width: 70px !important;
+        height: 70px !important;
+    }
+    .heart.big-heart.beat::before,
+    .heart.big-heart.beat::after{
+        width: 70px !important;
+        height: 70px !important;
+    }
+    .heart.big-heart.beat::before { top: -35px !important; left: 0 !important; }
+    .heart.big-heart.beat::after { left: 35px !important; top: 0 !important; }
+
+    .quote-line{
+        font-size: 0.9rem !important;
+    }
+    .happy-new-year{
+        font-size:2rem !important;
+    }
+    .gift-btn{
+        font-size:0.9rem !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" src="Screenrecorder-2026-01-01-01-08-20-977.mp3" loop></audio>
+
+<div class="stage stage-1" id="stage1">
+    <h1 class="top-text soft-float"
+        style="font-family:'Segoe Script','Lucida Handwriting','Comic Sans MS',cursive;
+        letter-spacing:2px;
+        text-shadow:0 0 12px #ff85a2,0 0 30px #ff4fa3;">
+        😏 Hmmmm…One more time mickey
+    </h1>
+
+    <p class="hint soft-float"
+       style="font-family:'Segoe Script','Lucida Handwriting',cursive;
+       text-shadow:0 0 8px pink;">
+        Click me once again 👇
+    </p>
+
+    <div class="center-box">
+        <div class="heart big-heart beat" onclick="goNext()"></div>
+    </div>
+</div>
+
+<div class="stage stage-2" id="stage2">
+    <div class="quote-box soft-float">
+
+        <span class="quote-line delay1"
+        style="font-family:'Segoe Script','Lucida Handwriting',cursive;
+        text-shadow:0 0 10px #ff85a2;">
+        😄 Acha… Mickey happy birthday 
+        </span><br>
+
+        <span class="quote-line delay2"
+        style="font-family:'Segoe Script','Lucida Handwriting',cursive;">
+        sorry for being late
+        </span><br><br>
+
+        <span class="quote-line delay3"
+        style="font-family:'Segoe Script','Lucida Handwriting',cursive;">
+        And may you be always that way mickey and happy returns of the day 
+        </span><br>
+
+        <span class="quote-line delay4"
+        style="font-family:'Segoe Script','Lucida Handwriting',cursive;
+        text-shadow:0 0 15px #ff4fa3;">
+        CHEERS!!
+        </span><br><br>
+
+        <span class="happy-new-year"
+        style="font-family:'Segoe Script','Lucida Handwriting',cursive;
+        color:#ffeb3b;
+        text-shadow:0 0 20px #ff4fa3,0 0 60px #ffeb3b;">
+        ✨ Happy New Year 2026 ✨
+        </span><br>
+
+        <span class="quote-line delay4"
+        style="font-family:'Segoe Script','Lucida Handwriting',cursive;">
+        Muskurati raho, khush raho,
+        </span><br>
+
+        <span class="quote-line delay4"
+        style="font-family:'Segoe Script','Lucida Handwriting',cursive;
+        text-shadow:0 0 10px #9c27b0;">
+        AND JUST CHILL!!!! 🌌
+        </span>
+
+        <br><br>
+
+        <a href="home.html" class="gift-btn"
+        style="font-family:'Segoe Script','Lucida Handwriting',cursive;
+        box-shadow:0 0 30px #ff4fa3;">
+        🎁 Chotu sa gift aapke liye
+        </a>
+
+        <p>
+        Click this!
+        </p>
+    </div>
+</div>
+
+<div class="heart-rain"></div>
+
+<script>
+function goNext() {
+    const music = document.getElementById("bgMusic");
+    music.volume = 0.7;
+    music.play().catch(()=>{});
+
+    document.getElementById("stage1").classList.add("hide");
+    const stage2 = document.getElementById("stage2");
+    stage2.classList.add("show");
+
+    stage2.querySelectorAll(".quote-line").forEach(e=>{
+        e.style.animationPlayState="running";
+    });
+    stage2.querySelector(".happy-new-year").style.animationPlayState="running";
+    stage2.querySelector(".gift-btn").style.animationPlayState="running";
+}
+
+// HEART RAIN WORKING
+const heartRain = document.querySelector(".heart-rain");
+setInterval(() => {
+    for (let i = 0; i < 6; i++) {
+        const heart = document.createElement("div");
+        heart.className = "falling-heart";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (2 + Math.random()*2) + "s";
+        heart.style.opacity = 0.6 + Math.random() * 0.4;
+        heartRain.appendChild(heart);
+        setTimeout(()=>heart.remove(),6000);
+    }
+}, 90);
+</script>
+
+</body>
+</html>

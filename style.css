@@ -1,0 +1,259 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #0f0024, #2b0033, #4a0033);
+    color: #fff;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* ===== TEXT ===== */
+.top-text {
+    margin-top: 25px;
+    font-size: 2.6rem;
+    color: #ffb6d9;
+    text-shadow: 0 0 10px #ff4fa3;
+}
+
+.hint {
+    margin-top: 8px;
+    color: #ffd1e8;
+    font-size: 1rem;
+}
+
+/* ===== CENTER HEART ===== */
+.center-box {
+    height: calc(100vh - 120px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* ===== HEART ===== */
+.heart {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(45deg, #ff0033, #ff5fa2);
+    position: relative;
+    transform: rotate(-45deg);
+    cursor: pointer;
+    box-shadow: 0 0 25px #ff4fa3;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(45deg, #ff0033, #ff5fa2);
+    border-radius: 50%;
+    position: absolute;
+}
+
+.heart::before {
+    top: -45px;
+    left: 0;
+}
+
+.heart::after {
+    left: 45px;
+    top: 0;
+}
+
+/* ===== BEATING ===== */
+.beat {
+    animation: beat 1s infinite;
+}
+
+@keyframes beat {
+    0% { transform: scale(1) rotate(-45deg); }
+    50% { transform: scale(1.25) rotate(-45deg); }
+    100% { transform: scale(1) rotate(-45deg); }
+}
+
+/* ===== BIG HEART ===== */
+.big-heart {
+    width: 130px;
+    height: 130px;
+}
+
+.big-heart::before,
+.big-heart::after {
+    width: 130px;
+    height: 130px;
+}
+
+.big-heart::before {
+    top: -65px;
+}
+
+.big-heart::after {
+    left: 65px;
+}
+
+/* ===== QUOTE ===== */
+.quote-box {
+    display: none;
+    max-width: 600px;
+    margin: auto;
+    padding: 30px;
+    animation: fadeUp 1.5s ease forwards;
+    text-align: center;
+}
+
+.quote {
+    font-size: 1.2rem;
+    color: #ffd6ec;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.gift-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, #ff5fa2, #ff99cc);
+    color: #000;
+    border-radius: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 0 15px #ff5fa2;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== HEART RAIN ===== */
+.heart-rain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.falling-heart {
+    position: absolute;
+    top: -20px;
+    width: 12px;  /* smaller */
+    height: 12px; /* smaller */
+    background: linear-gradient(135deg, #ff4f8b, #ff85a2);
+    transform: rotate(45deg);
+    opacity: 0.85;
+    animation: fallDown linear forwards;
+}
+
+.falling-heart::before,
+.falling-heart::after {
+    content: "";
+    position: absolute;
+    width: 12px;  /* smaller */
+    height: 12px; /* smaller */
+    background: linear-gradient(135deg, #ff4f8b, #ff85a2);
+    border-radius: 50%;
+}
+
+.falling-heart::before {
+    top: -6px;
+    left: 0;
+}
+
+.falling-heart::after {
+    left: -6px;
+    top: 0;
+}
+
+@keyframes fallDown {
+    0% {
+        transform: translateY(-20px) rotate(45deg);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(110vh) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+/* ===== FINAL PAGE ===== */
+.final-text {
+    margin-top: 220px;
+    font-size: 2rem;
+    color: #ffd1e8;
+    text-shadow: 0 0 15px #ff5fa2;
+}
+
+/* ===== STAGE SYSTEM ===== */
+.stage {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s ease;
+}
+
+.stage-2 {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.stage.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.stage.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.stage-2 .quote-box {
+    display: block;
+    opacity: 0;
+}
+
+.stage-2.show .quote-box {
+    opacity: 1;
+    animation: fadeUp 1.5s ease forwards;
+}
+
+.stage .center-box {
+    height: 100vh;
+}
+
+/* ===== NEW YEAR EFFECT ===== */
+.newyear {
+    display: inline-block;
+    animation: spinIn 1.6s ease forwards;
+    color: #ffb6d9;
+    text-shadow: 0 0 15px #ff4fa3;
+    font-size: 2.5rem; /* increased font size */
+}
+
+@keyframes spinIn {
+    from {
+        opacity: 0;
+        transform: rotate(-360deg) scale(0.6);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+/* ===== HEART CONTAINER FALLING HEARTS ===== */
+.heart-container .heart {
+    display:inline-block;
+    line-height:0;
+    position:absolute;
+    font-size:6px; /* base font-size */
+}

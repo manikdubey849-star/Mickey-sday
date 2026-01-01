@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hello Mahi ji</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:radial-gradient(circle at top,#2b0033,#0f0024);
+    color:white;
+    font-family:'Segoe UI',sans-serif;
+    overflow:hidden;
+    text-align:center;
+}
+
+/* TEXT */
+.top-text{
+    font-size:clamp(1.8rem,6vw,3rem);
+    margin-bottom:10px;
+    text-shadow:0 0 15px #ff4fa3,0 0 40px #ff85a2;
+}
+
+.hint{
+    font-size:1.1rem;
+    opacity:0.9;
+    margin-bottom:40px;
+}
+
+/* HEART */
+.center-box{
+    z-index:5;
+}
+
+.heart{
+    width:90px;
+    height:90px;
+    background:#ff4fa3;
+    transform:rotate(45deg);
+    position:relative;
+    animation:beat 1s infinite;
+    box-shadow:0 0 30px #ff4fa3;
+}
+
+.heart::before,
+.heart::after{
+    content:'';
+    width:90px;
+    height:90px;
+    background:#ff4fa3;
+    border-radius:50%;
+    position:absolute;
+}
+
+.heart::before{top:-45px;left:0}
+.heart::after{left:-45px;top:0}
+
+@keyframes beat{
+    0%,100%{transform:rotate(45deg) scale(1)}
+    50%{transform:rotate(45deg) scale(1.15)}
+}
+
+/* HEART RAIN */
+.heart-rain{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+}
+
+.drop{
+    position:absolute;
+    width:12px;
+    height:12px;
+    background:#ff4fa3;
+    transform:rotate(45deg);
+    animation:fall linear forwards;
+}
+
+.drop::before,
+.drop::after{
+    content:'';
+    width:12px;
+    height:12px;
+    background:#ff4fa3;
+    border-radius:50%;
+    position:absolute;
+}
+.drop::before{top:-6px}
+.drop::after{left:-6px}
+
+@keyframes fall{
+    from{transform:translateY(-10vh) rotate(45deg);opacity:0}
+    to{transform:translateY(110vh) rotate(45deg);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<h1 class="top-text">Hello Micku</h1>
+<p class="hint">press me 💗</p>
+
+<div class="center-box">
+    <a href="second.html">
+        <div class="heart"></div>
+    </a>
+</div>
+
+<div class="heart-rain" id="rain"></div>
+
+<script>
+const rain=document.getElementById("rain");
+setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="drop";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=(3+Math.random()*2)+"s";
+    rain.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+},120);
+</script>
+
+</body>
+</html>
